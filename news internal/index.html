@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily News</title>
+    <style>
+        body {
+            background-color: #FFFACD;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #2C3E50;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+        }
+        .sidebar h2 {
+            text-align: center;
+            border-bottom: 2px solid #FFD700;
+            padding-bottom: 10px;
+        }
+        .popup-ad {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none; /* Hide it initially */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .popup-content {
+            background-color: #FFD700;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            width: 50%;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            font-size: 24px;
+        }
+        .close-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        .sidebar a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-bottom: 1px solid #555;
+        }
+        .sidebar a:hover {
+            background-color: #FFD700;
+            color: black;
+        }
+        .content {
+            margin-left: 270px;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #2C3E50;
+            font-size: 42px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+        h2 {
+            color: #D35400;
+            border-bottom: 3px solid #999;
+            padding-bottom: 5px;
+            font-size: 28px;
+        }
+        p {
+            line-height: 1.8;
+            color: #555;
+            font-size: 18px;
+        }
+        a {
+            color: #2980B9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .news-image {
+            display: block;
+            margin: 0 auto;
+            width: 80%;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .ad-section {
+            text-align: center;
+            background-color: #FFD700;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .subscription {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 60%;
+            margin: 50px auto;
+            height: 400px;
+        }
+    
+        .subscription h2 {
+            color: white;
+            margin-bottom: 10px;
+        }
+    
+        .subscription p {
+            color: #333;
+            font-size: 14px;
+        }
+    
+        .subscription input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+    
+        .subscribe-btn {
+            display: inline-block;
+            background-color: #2C3E50;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: 0.3s;
+            margin-top: 10px;
+            text-align: center;
+        }
+    
+        .subscribe-btn:hover {
+            background-color: #1A252F;
+            transform: scale(1.05);
+        }
+        #confirmation {
+            display: none;
+            color: green;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .preferences {
+            background: #FFD700; /* Gold */
+            color: black;
+            padding: 8px 15px;
+            border-radius: 0 0 10px 10px;
+            text-align: center;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        .preferences h2 {
+            font-size: 16px;
+            margin: 0;
+        }
+        .preferences label {
+            display: flex;
+            align-items: center;
+            gap: 5px; /* Space between checkbox and text */
+            font-size: 14px;
+        }
+        .preferences select {
+            background: white;
+            color: black;
+            border: 1px solid black;
+            padding: 3px;
+            font-size: 14px;
+        }
+        
+    
+        .dark-mode {
+            background-color: #333;
+            color: white;
+        }
+    
+        .dark-mode .sidebar {
+            background-color: #1A252F;
+        }
+    </style>
+        
+</head>
+<body>
+    
+<!-- Toggle Preferences Section -->
+<div class="preferences">
+    <h2>⚙️ User Preferences</h2>
+    <label>
+        <input type="checkbox" id="darkModeToggle"> Enable Dark Mode
+    </label>
+    <br>
+    <label>
+        <input type="checkbox" id="adToggle"> Show Popup Ads
+    </label>
+    <br>
+    <label>Font Size:
+        <select id="fontSizeSelector">
+            <option value="small">Small</option>
+            <option value="medium" selected>Medium</option>
+            <option value="large">Large</option>
+        </select>
+    </label>
+</div>
+
+
+    <div class="sidebar">
+        <h2>Daily News</h2>
+        <a href="#breaking">Breaking News</a>
+        <a href="#sports">Sports</a>
+        <a href="#weather">Weather</a>
+        <a href="#editorial">Editorial</a>
+        <a href="#celebrity">Celebrity</a>
+        <a href="#ads">Advertisements</a>
+    </div>
+
+    <div class="content">
+        <h1>Daily News</h1>
+        <img src="news.jpg" alt="News Image" class="news-image">
+        <p><b>Published:</b> February 18, 2025</p>
+        <hr>
+
+        <h2 id="breaking">Breaking News: Major Event Shakes the City</h2>
+        <p><b>By John Doe</b> - In a shocking turn of events, the city was left in awe today as an unexpected incident unfolded in the downtown area. Businesses were forced to close, and panic spread as authorities scrambled to restore order.</p>
+        <p>The power outage, which lasted for nearly six hours, affected thousands of homes and businesses. Traffic signals were down, causing congestion, and emergency services were stretched thin as they responded to multiple distress calls. Many residents took to social media to express their frustration, demanding an urgent response from city officials.</p>
+        <p>Authorities are currently investigating the cause, but initial reports suggest a fault in the main power grid. The mayor has assured citizens that efforts are underway to modernize the aging infrastructure to prevent future disruptions.</p>
+        <p>Local businesses suffered significant losses due to the outage, with some estimating damages in the thousands of dollars. "We had to shut down for the entire afternoon, and we lost a whole day's revenue," said a café owner in the downtown area.</p>
+        <p>Residents reported hearing a loud explosion before the outage, leading to speculation about whether a transformer may have failed. Power company officials have promised a thorough investigation and improvements to ensure such an event does not happen again.</p>
+        <p>Meanwhile, city officials are urging residents to remain patient as emergency teams work to assess the damage. Some neighborhoods have already regained power, while others are expected to be restored by the end of the day.</p>
+        <a href="news1.html">Read more</a>
+        <hr>
+
+        <h2 id="sports">Sports Update: Local Team Secures Championship Victory</h2>
+        <p><b>By Jane Smith</b> - The city’s beloved football team, the Thunder Strikers, has won the national championship in a nail-biting final match. Fans filled the stadium, cheering on their team in an electrifying atmosphere.</p>
+        <p>Despite being down 2-1 at halftime, the Thunder Strikers made an incredible comeback with a last-minute goal by their star player Alex Johnson. The final score of 3-2 secured their place in history, marking their third championship win in a decade.</p>
+        <p>City officials have announced a celebratory parade tomorrow, where fans can meet their heroes and take part in festivities planned in their honor. Sports analysts are calling this one of the most thrilling matches of the decade.</p>
+        <a href="news3.html">See the Image</a>
+        <hr>
+
+        <h2 id="weather">Weather Report: A Sunny Start to the Week</h2>
+        <p><b>Today's Forecast:</b> The city is expected to experience clear skies and warm temperatures throughout the day. Meteorologists predict highs of 85°F (29°C), making it a perfect day for outdoor activities.</p>
+        <p>Residents are advised to take precautions against heat exposure during peak afternoon hours. The weather department has also predicted a mild drop in temperature later in the week, with light showers expected over the weekend.</p>
+        <p>Winds will be moderate at around 10 mph, providing some relief from the heat. The humidity levels are expected to be slightly above average, so staying hydrated is essential. Coastal areas may experience slight breezes, making it an ideal time for beachgoers.</p>
+        <p>Looking ahead, early predictions indicate a possible cold front moving in next week, which could bring scattered thunderstorms. Residents planning outdoor events should stay updated with the latest forecasts to make necessary arrangements.</p>
+        <hr>
+
+        <h2 id="editorial">Editorial: The Future of Urban Development</h2>
+        <p><b>Opinion by Alex Brown</b> - As cities continue to grow, the challenges of urban development become more complex. Experts argue that sustainable development must be prioritized, with a focus on public transportation and green spaces to improve the quality of urban living.</p>
+        <p>One of the biggest challenges facing urban areas is the rapid expansion of populations, leading to congestion, pollution, and a strain on infrastructure. Many metropolitan areas have struggled to keep up with demand, resulting in inadequate housing and transportation systems.</p>
+        <p>City planners and government officials are now emphasizing mixed-use developments, where residential, commercial, and recreational spaces are integrated efficiently. This concept is already being tested in major global cities and has shown promise in reducing commute times and increasing quality of life.</p>
+        <p>Another key factor in urban sustainability is the incorporation of smart technology. From intelligent traffic management systems to energy-efficient buildings, technology is playing a crucial role in shaping the cities of tomorrow. Experts believe that cities must embrace digital transformation to ensure long-term sustainability.</p>
+        <p>However, the implementation of these ideas requires significant funding and policy support. Governments and private sectors must collaborate to create a roadmap for smart urban growth. Without decisive action, many cities will continue to experience infrastructure deterioration and environmental challenges.</p>
+        <p>The discussion around urban development is ongoing, and as new innovations emerge, the hope is that future cities will be smarter, greener, and more livable for everyone.</p>
+        <a href="news2.html">Read more</a>
+        <hr>
+
+        <h2 id="celebrity">Celebrity Travel: Star Actress Enjoys a Luxurious Getaway</h2>
+        <a href="celebrity.html">see the news</a>
+        <hr>
+
+        <p id="ads" class="ad-section"><b>Ad - ✈ Special Travel Deals from Us! <a href="news4.html">Click here</a> ✈</b></p>
+    </div>
+    <div class="popup-ad" id="popupAd">
+        <div class="popup-content">
+            <p><b>✈ Special Travel Deals from Us! <a href="news4.html">Click here</a> ✈</b></p>
+            <button class="close-btn" onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <div class="subscription" id="subscription">
+        <h2>📩 Subscribe to Daily News</h2>
+        <p>Get the latest headlines, exclusive updates, and special offers directly in your inbox.</p>
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <a href="reg.html" class="subscribe-btn">Subscribe Now</a>
+        <p id="confirmation">✅ Subscription Successful!</p>
+    </div>
+    
+    <script>
+        // Show the popup after 3 seconds
+        setTimeout(function() {
+            document.getElementById('popupAd').style.display = 'flex';
+        }, 3000); // 3000ms = 3 seconds
+    
+        function closePopup() {
+            document.getElementById('popupAd').style.display = 'none';
+        }
+    </script>
+   
+        
+    <script>
+        function subscribe() {
+            let email = document.getElementById("email").value;
+            if (email) {
+                document.getElementById("confirmation").style.display = "block";
+                setTimeout(() => {
+                    document.getElementById("confirmation").style.display = "none";
+                }, 3000);
+            }
+        }
+    
+document.addEventListener("DOMContentLoaded", function() {
+    // Load preferences from localStorage
+    let darkMode = localStorage.getItem("darkMode") === "true";
+    let showAds = localStorage.getItem("showAds") === "true";
+    let fontSize = localStorage.getItem("fontSize") || "medium";
+
+    // Apply saved preferences
+    if (darkMode) document.body.classList.add("dark-mode");
+    document.getElementById("darkModeToggle").checked = darkMode;
+
+    if (!showAds) document.getElementById("popupAd").style.display = "none";
+    document.getElementById("adToggle").checked = showAds;
+
+    document.body.style.fontSize = fontSize;
+    document.getElementById("fontSizeSelector").value = fontSize;
+
+    // Event Listeners for Preferences
+    document.getElementById("darkModeToggle").addEventListener("change", function() {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem("darkMode", this.checked);
+    });
+
+    document.getElementById("adToggle").addEventListener("change", function() {
+        if (this.checked) {
+            document.getElementById("popupAd").style.display = "flex";
+        } else {
+            document.getElementById("popupAd").style.display = "none";
+        }
+        localStorage.setItem("showAds", this.checked);
+    });
+
+    document.getElementById("fontSizeSelector").addEventListener("change", function() {
+        document.body.style.fontSize = this.value;
+        localStorage.setItem("fontSize", this.value);
+    });
+});
+</script>
+
+    
+    
+</body>
+</html>
