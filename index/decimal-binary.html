@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decimal to Binary Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Decimal to Binary Converter</h2>
+    <input type="number" id="decimalInput" placeholder="Enter decimal number">
+    <button onclick="convertToBinary()">Convert</button>
+    <p id="result"></p>
+
+    <script>
+        function convertToBinary() {
+            let decimal = document.getElementById("decimalInput").value;
+            if (decimal === "" || isNaN(decimal)) {
+                document.getElementById("result").innerText = "Please enter a valid decimal number!";
+                return;
+            }
+            let binary = Number(decimal).toString(2);
+            document.getElementById("result").innerText = "Binary: " + binary;
+        }
+    </script>
+</body>
+</html>

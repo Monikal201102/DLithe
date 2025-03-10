@@ -1,0 +1,35 @@
+/* styles.css */
+.todo-container {
+    width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .task-input {
+    margin-bottom: 10px;
+  }
+  
+  .task-input input {
+    padding: 5px;
+    width: 200px;
+  }
+  
+  .task-input button,
+  .task-item button {
+    margin-left: 5px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .task-item {
+    list-style: none;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    background: #f4f4f4;
+    padding: 5px;
+  }

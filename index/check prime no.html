@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Number Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Prime Number Checker</h2>
+    <input type="number" id="numberInput" placeholder="Enter a number">
+    <button onclick="checkPrime()">Check</button>
+    <p id="result"></p>
+
+    <script>
+        function isPrime(num) {
+            if (num < 2) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+        function checkPrime() {
+            let number = document.getElementById("numberInput").value;
+            if (number === "" || isNaN(number)) {
+                document.getElementById("result").innerText = "Please enter a valid number!";
+                return;
+            }
+            number = Number(number);
+            let resultText = isPrime(number) ? `${number} is a Prime Number` : `${number} is NOT a Prime Number`;
+            document.getElementById("result").innerText = resultText;
+        }
+    </script>
+</body>
+</html>
