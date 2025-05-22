@@ -1,0 +1,53 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    background-color: #f1f3f6;
+  }
+  
+  .container {
+    width: 90%;
+    margin: auto;
+  }
+  
+  button {
+    cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  button.primary {
+    background-color: #2874f0;
+    color: white;
+  }
+  
+  button.secondary {
+    background-color: #ff9f00;
+    color: white;
+  }
+  
+  input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #2874f0;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  

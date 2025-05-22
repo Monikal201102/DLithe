@@ -1,0 +1,127 @@
+.homepage {
+  text-align: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+/* 🔍 Search Bar */
+.search-bar {
+  width: 60%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* 🔥 Offers Section */
+.offers-container {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px 0;
+}
+
+.offer-card {
+  flex: 1;
+  min-width: 250px;
+  padding: 15px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.offer-card:nth-child(1) { background-color: #FF9800; }
+.offer-card:nth-child(2) { background-color: #E91E63; }
+.offer-card:nth-child(3) { background-color: #3F51B5; }
+
+/* 🎯 Advertisements */
+.ad-banner {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.ad-banner img {
+  width: 50%;
+  border-radius: 10px;
+}
+
+/* 🛍️ Category Section */
+.category-container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.category-container h2 {
+  text-align: center;
+}
+
+.categories {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.categories a {
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+}
+
+.categories a:nth-child(1) { background: #03A9F4; }
+.categories a:nth-child(2) { background: #E91E63; }
+.categories a:nth-child(3) { background: #4CAF50; }
+.categories a:nth-child(4) { background: #FF9800; }
+
+/* 🏆 Featured Products */
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+}
+
+.product-title {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.product-price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #008000;
+}
+
+/* ❌ No Results */
+.no-results {
+  text-align: center;
+  font-size: 18px;
+  color: red;
+}

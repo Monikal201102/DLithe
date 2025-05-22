@@ -1,0 +1,54 @@
+/* Orders Page Styles */
+.orders-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+  
+  .order-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .order-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .order-details {
+    flex-grow: 1;
+    margin-left: 15px;
+  }
+  
+  .order-title {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  .order-status {
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .delivered {
+    color: green;
+  }
+  
+  .pending {
+    color: orange;
+  }
+  
+  .orders-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
